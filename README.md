@@ -19,6 +19,7 @@ IntelliJ IDEA + Navicat + Git + Chrome
 -----------
 
 前端：jQuey + ajax
+
 后端：SSM + MySQL
 
 <hr>
