@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookproject.dao.OrderDao">
+<!--    //保存订单-->
+<!--    int saveOrder(Order order);-->
+<insert id="saveOrder">
+    INSERT INTO `order` (orderId,createTime,price,status,username)
+    VALUES (#{orderId},#{createTime},#{price},#{status},#{username});
+</insert>
+<!--    //查看所有订单-->
+<!--    List<Order> queryAllOrder();-->
+<select id="queryAllOrder" resultType="com.bookproject.bean.Order">
+    select orderId,createTime,price,status from `order`;
+</select>
+<!--    //修改订单状态-->
+<!--    int changeOrderStatus(String orderId,Integer status);-->
+<update id="changeOrderStatus">
+    update `order` set status =#{status} where orderId=#{orderId}
+</update>
+<!--    //根据用户编号查看我的订单-->
+<!--    List<Order> queryOrderByUsername(String username);-->
+<select id="queryOrderByUsername" resultType="com.bookproject.bean.Order">
+    select orderId,createTime,price,status from `order` where username=#{username};
+</select>
+
+<select id="queryOrderByStatus0" resultType="com.bookproject.bean.Order">
+    SELECT orderId,createTime,price,status FROM `order` WHERE `status` = 0 ;
+</select>
+<select id="queryOrderByStatus1" resultType="com.bookproject.bean.Order">
+    SELECT orderId,createTime,price,status FROM `order` WHERE `status` = 1 ;
+    </select>
+
+<update id="modifyOrderStatus">
+    update `order` set `status`= #{status} where orderId = #{orderId};
+</update>
+</mapper>

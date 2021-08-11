@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookproject.dao.StudentDao">
+    <insert id="insertStudent" >
+        insert into student (username,name,password,job,phone)
+        values (#{username},#{name},#{password},#{job},#{phone});
+    </insert>
+    <update id="updateStudent">
+        update student set password = #{password} where name = #{name};
+    </update>
+    <select id="queryStudents" resultType="com.bookproject.bean.Student">
+        select username,name,password,job,phone from student ;
+    </select>
+    <select id="queryByName" resultType="com.bookproject.bean.Student">
+        select name,password
+        from student
+        where name=#{name};
+    </select>
+    <select id="queryByUsername" resultType="com.bookproject.bean.Student">
+        select username,password
+        from student
+        where username=#{username};
+    </select>
+    <delete id="deleteStudent">
+        delete from student where name=#{name};
+    </delete>
+
+    <select id="getList" resultType="com.bookproject.bean.Student">
+        select username,name,password,job,phone from student order by username asc limit #{start},#{count}
+    </select>
+    <select id="getTotal" resultType="Integer">
+        select count(*) from  student
+    </select>
+
+    <select id="isExistStudent" resultType="com.bookproject.bean.Student">
+        select username,password
+        from student
+        where username=#{username}
+        and password=#{password};
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookproject.dao.AdminDao">
+    <insert id="insertAdmin" >
+        insert into admin (username,name,password)
+        values (#{username},#{name},#{password});
+    </insert>
+    <update id="modifyAdmin">
+        update admin set name=#{name},password=#{password} where username=#{username};
+    </update>
+    <update id="updateAdmin">
+        update admin set password = #{password} where name = #{name};
+    </update>
+    <select id="queryAdmins" resultType="com.bookproject.bean.Admin">
+        select name,password from admin ;
+    </select>
+    <select id="queryByName" resultType="com.bookproject.bean.Admin">
+        select name,password
+        from admin
+        where name=#{name};
+    </select>
+    <select id="queryByUsername" resultType="com.bookproject.bean.Admin">
+        select username,password
+        from admin
+        where username=#{username};
+    </select>
+    <delete id="deleteAdmin">
+        delete from admin where name=#{name};
+    </delete>
+
+    <select id="getList" resultType="com.bookproject.bean.Admin">
+        select username,name,password from admin order by username asc limit #{start},#{count}
+    </select>
+    <select id="getTotal" resultType="Integer">
+        select count(*) from  admin
+    </select>
+
+    <select id="isExistAdmin" resultType="com.bookproject.bean.Admin">
+        select name from admin where username=#{username} and password=#{password};
+    </select>
+
+    <update id="updatePwd" >
+        update admin
+        set password = #{password}
+        where username = #{username};
+    </update>
+</mapper>

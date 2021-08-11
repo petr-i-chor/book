@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookproject.dao.PurchaserDao">
+    <insert id="insertPurchaser" >
+        insert into purchaser (username,name,password,job,phone)
+        values (#{username},#{name},#{password},#{job},#{phone});
+    </insert>
+    <update id="updatePurchaser">
+        update purchaser set password = #{password} where name = #{name};
+    </update>
+    <select id="queryPurchasers" resultType="com.bookproject.bean.Purchaser">
+        select username,name,password,job,phone from purchaser ;
+    </select>
+    <select id="queryByName" resultType="com.bookproject.bean.Purchaser">
+        select name,password
+        from purchaser
+        where name=#{name};
+    </select>
+    <select id="queryByUsername" resultType="com.bookproject.bean.Purchaser">
+        select username,password
+        from purchaser
+        where username=#{username};
+    </select>
+    <delete id="deletePurchaser">
+        delete from purchaser where name=#{name};
+    </delete>
+
+    <select id="getList" resultType="com.bookproject.bean.Purchaser">
+        select username,name,password,job,phone from purchaser order by username asc limit #{start},#{count}
+    </select>
+    <select id="getTotal" resultType="Integer">
+        select count(*) from  purchaser
+    </select>
+
+    <select id="queryPurchaserByNameAndPwd" resultType="com.bookproject.bean.Purchaser">
+        select username,name,password,job,phone from purchaser where username=#{username} and password=#{password} ;
+    </select>
+
+
+</mapper>

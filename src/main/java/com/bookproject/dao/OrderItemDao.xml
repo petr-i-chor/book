@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookproject.dao.OrderItemDao">
+<!--    //保存订单明细-->
+<!--    int saveOrderItem(OrderItem orderItem);-->
+<insert id="saveOrderItem">
+    insert into orderItem (bid,name,author,price,count,totalPrice,orderId) values (#{bid},#{name},#{author},#{price},#{count},#{totalPrice},#{orderId})
+</insert>
+<!--    //根据订单编号查询订单明细-->
+<!--    List<OrderItem> queryOrderItemByOrderId(String orderId);-->
+<select id="queryOrderItemByOrderId" resultType="com.bookproject.bean.OrderItem">
+    select bid,name,author,price,count,totalPrice,orderId from orderItem where orderId=#{orderId};
+</select>
+
+</mapper>
